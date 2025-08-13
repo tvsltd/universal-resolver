@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: uni-resolver-driver-did-uport
+spec:
+  type: {{ .Values.service.uport.type }}
+  selector:
+    app: uni-resolver-driver-did-uport
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.uport.port }}
+      targetPort: {{ .Values.service.uport.targetPort }}

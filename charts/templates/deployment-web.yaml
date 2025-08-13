@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uni-resolver-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uni-resolver-web
+  template:
+    metadata:
+      labels:
+        app: uni-resolver-web
+    spec:
+      containers:
+        - name: web
+          image: "{{ .Values.image.web.repository }}:{{ .Values.image.web.tag }}"
+          imagePullPolicy: {{ .Values.image.web.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          env:
+            {{- range .Values.env.web }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}

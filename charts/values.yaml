@@ -1,0 +1,35 @@
+image:
+  web:
+    repository: universalresolver/uni-resolver-web
+    tag: latest
+    pullPolicy: IfNotPresent
+  uport:
+    repository: uport/uni-resolver-driver-did-uport
+    tag: 5.0.3
+    pullPolicy: IfNotPresent
+
+service:
+  web:
+    type: ClusterIP
+    port: 8080
+  uport:
+    type: ClusterIP
+    port: 8081
+    targetPort: 8081
+
+env:
+  uport:
+    - name: NODE_TLS_REJECT_UNAUTHORIZED
+      value: "0"
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: uniresolver.tx.test
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []

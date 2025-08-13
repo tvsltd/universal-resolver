@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uni-resolver-driver-did-uport
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uni-resolver-driver-did-uport
+  template:
+    metadata:
+      labels:
+        app: uni-resolver-driver-did-uport
+    spec:
+      containers:
+        - name: uport
+          image: "{{ .Values.image.uport.repository }}:{{ .Values.image.uport.tag }}"
+          imagePullPolicy: {{ .Values.image.uport.pullPolicy }}
+          ports:
+            - containerPort: 8081
+          env:
+            {{- range .Values.env.uport }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}

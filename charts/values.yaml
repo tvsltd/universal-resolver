@@ -1,3 +1,5 @@
+---
+
 image:
   web:
     repository: universalresolver/uni-resolver-web
@@ -20,7 +22,7 @@ service:
 env:
   uport:
     - name: NODE_TLS_REJECT_UNAUTHORIZED
-      value: "0"
+      value: "1"
 
 ingress:
   enabled: true
@@ -28,7 +30,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - host: uniresolver.tx.test
+    - host: uniresolver.example.org
       paths:
         - path: /
           pathType: Prefix

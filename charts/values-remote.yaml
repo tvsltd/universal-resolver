@@ -1,0 +1,13 @@
+---
+
+env:
+  uport:
+    - name: NODE_TLS_REJECT_UNAUTHORIZED
+      value: "0"
+
+ingress:
+  hosts:
+    - host: uniresolver.b.dsaas.tvsdevops.co.uk
+      paths:
+        - path: /
+          pathType: Prefix
